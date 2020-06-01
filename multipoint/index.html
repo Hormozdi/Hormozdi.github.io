@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /> -->
+        <meta
+            name="viewport"
+            content="initial-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+            crossorigin="anonymous"
+        />
+
+        <title>Hello, world!</title>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+            integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+            crossorigin=""
+        />
+        <script
+            src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""
+        ></script>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            #mapparent {
+                padding: 0;
+            }
+
+            #mapid {
+                width: 100%;
+                height: 100vh;
+            }
+
+            ul#points-list .badge-danger {
+                display: none;
+            }
+
+            ul#points-list li:last-child .badge {
+                display: inline-block;
+            }
+
+            .hidepart {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-9" id="mapparent">
+                    <div id="mapid"></div>
+                </div>
+                <div class="col" id="sidebar">
+                    <br />
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">lat</span>
+                        </div>
+                        <input type="text" class="form-control" id="lat" />
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">lng</span>
+                        </div>
+                        <input type="text" class="form-control" id="lng" />
+                    </div>
+                    <button
+                        id="addNewPoint"
+                        type="button"
+                        class="btn btn-primary btn-sm btn-block"
+                    >
+                        Add
+                    </button>
+                    <br />
+                    <ul class="list-group" id="points-list"></ul>
+                    <br />
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1"
+                            >Show Url</label
+                        >
+                        <textarea
+                            class="form-control"
+                            id="showurl"
+                            rows="3"
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1"
+                            >Edit Url</label
+                        >
+                        <textarea
+                            class="form-control"
+                            id="editurl"
+                            rows="3"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+            src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
