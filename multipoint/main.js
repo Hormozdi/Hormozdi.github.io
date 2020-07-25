@@ -1,14 +1,18 @@
 (function () {
     var listView = document.getElementById("points-list");
+    var radius = document.getElementById("radius");
     var lat = document.getElementById("lat");
     var lng = document.getElementById("lng");
     var showurl = document.getElementById("showurl");
     var editurl = document.getElementById("editurl");
 
-    var points = [];
-    var markers = [];
+    var points   = [];
+    var markers  = [];
+    var circles  = [];
 
     var mymap = L.map("mapid").setView([35.727481, 51.403944], 11);
+
+    radius.value = 0;
 
     L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
@@ -54,12 +58,14 @@
         }
 
         var newNode = point
-            ? point
+            ? [point[0], point[1]]
             : [(+lat.value).toFixed(6), (+lng.value).toFixed(6)];
         lat.value = "";
         lng.value = "";
 
-        points.push(newNode);
+        var newRadius = point && point[2] ? point[2] : +radius.value;
+
+        points.push([...newNode, newRadius]);
 
         var element = document.createElement("li");
         element.className =
@@ -77,10 +83,16 @@
             .addEventListener("click", removeNode, true);
 
         var marker = L.marker(newNode).addTo(mymap);
+        var circle = L.circle(newNode, newRadius, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5
+        }).addTo(mymap);
         // .bindPopup("<b>Hello world!</b><br />I am a popup.")
         // .openPopup();
 
         markers.push(marker);
+        circles.push(circle);
 
         var group = new L.featureGroup(markers);
         mymap.fitBounds(group.getBounds());
@@ -93,6 +105,8 @@
         points.splice(num, 1);
         mymap.removeLayer(markers[num]);
         markers.splice(num, 1);
+        mymap.removeLayer(circles[num]);
+        circles.splice(num, 1);
         e.target.parentElement.remove();
         updateShowUrl();
     }
