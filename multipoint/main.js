@@ -1,6 +1,7 @@
 (function () {
     var listView = document.getElementById("points-list");
-    var radius = document.getElementById("radius");
+    var radius      = document.getElementById("radius");
+    var radiusColor = document.getElementById("radiusColor");
     var lat = document.getElementById("lat");
     var lng = document.getElementById("lng");
     var showurl = document.getElementById("showurl");
@@ -13,6 +14,7 @@
     var mymap = L.map("mapid").setView([35.727481, 51.403944], 11);
 
     radius.value = 0;
+    radiusColor.value  = "000"
 
     L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw",
@@ -64,8 +66,9 @@
         lng.value = "";
 
         var newRadius = point && point[2] ? point[2] : +radius.value;
+        var newRadiusColor = point && point[3] ? point[3] : radiusColor.value;
 
-        points.push([...newNode, newRadius]);
+        points.push([...newNode, newRadius, newRadiusColor]);
 
         var element = document.createElement("li");
         element.className =
@@ -84,8 +87,8 @@
 
         var marker = L.marker(newNode).addTo(mymap);
         var circle = L.circle(newNode, newRadius, {
-            color: 'red',
-            fillColor: '#f03',
+            color: '#' + newRadiusColor,
+            fillColor: '#' + newRadiusColor,
             fillOpacity: 0.5
         }).addTo(mymap);
         // .bindPopup("<b>Hello world!</b><br />I am a popup.")
