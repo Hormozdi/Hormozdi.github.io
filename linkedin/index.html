@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="./bootstrap.min.css" rel="stylesheet" />
+    <link href="./style.css" rel="stylesheet" />
+    <script src="./vue.js"></script>
+    <script src="./axios.min.js"></script>
+  </head>
+  <body>
+    <section class="header-box">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6"></div>
+          <div class="col">
+            <h1>کسب درآمد آسان از لینکدین</h1>
+            <h2 style="text-shadow: 2px 2px #fff">
+              در جمع اولین نفراتی باشید که با استفاده از لینکدین به درآمدهای
+              میلیاردی خواهند رسید
+            </h2>
+            <h3 style="color: chocolate; text-shadow: 2px 2px #fff">
+              خرید و فروش لایک و کامنت
+            </h3>
+            <br />
+            <p>
+              <a
+                href="#main-part"
+                type="submit"
+                class="btn btn-primary btn-lg"
+                style="margin: auto 10px"
+                >ثبت نام در سامانه</a
+              >
+            </p>
+            <p>
+              <a
+                href="#main-part"
+                type="submit"
+                class="btn btn-info btn-lg"
+                style="margin: auto 10px"
+                >ورود به حساب کاربری</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br />
+    <br />
+    <div class="container" id="main-part">
+      <div class="row" v-if="formSubmited">
+        <div class="col">
+          <div class="alert alert-success" role="alert">
+            ثبت نام شما با موفقیت انجام شد. لطفا منتظر تماس تیم پشتیبانی بمانید.
+            باتشکر
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h4>توجه نمایید</h4>
+          <ul>
+            <li>
+              ورود به سامانه منوط به تایید حساب لینکدین شما و یا کسب و کار شما
+              می باشد.
+            </li>
+            <li>اطلاعات ورود برای شما ایمیل خواهد شد</li>
+            <li>
+              شماره پشتیبانی:
+              <span
+                style="text-align: left; direction: ltr; display: inline-block"
+              >
+                +98 910 - 4839 - 216
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row" v-if="!formSubmited">
+        <div class="col">
+          <form>
+            <div class="form-group">
+              <label for="select-type"
+                >اینفلوئنسر هستید یا کسب و کار دارید؟</label
+              >
+              <select
+                v-model="formData.type"
+                class="form-control"
+                id="select-type"
+              >
+                <option value="influencer">اینفلوئنسر هستم</option>
+                <option value="businessowner">کسب و کار دارم</option>
+              </select>
+            </div>
+
+            <div v-if="formData.type=='influencer'" class="form-group">
+              <label for="linkedin-address">لینک پروفایل لینکدین</label>
+              <input
+                v-model="formData.linkedin"
+                v-on:keyup="checkFormValidation"
+                class="form-control ltr-input"
+                id="linkedin-address"
+                placeholder="Enter linkedin profile"
+              />
+              <small class="form-text text-muted">
+                پرداخت ها پس از تایید - بر اساس فعالیت های این حساب خواهد بود
+              </small>
+            </div>
+
+            <div v-if="formData.type!='influencer'" class="form-group">
+              <label for="website-address">لینک وبسایت شما</label>
+              <input
+                v-model="formData.website"
+                v-on:keyup="checkFormValidation"
+                class="form-control ltr-input"
+                id="website-address"
+                placeholder="Enter website url"
+              />
+              <small class="form-text text-muted">
+                تنها مجاز به تبلیغ محصولات و خدمات ثبت شده در این پبسایت خواهید
+                بود
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="email-address">آدرس ایمیل</label>
+              <input
+                v-model="formData.email"
+                v-on:keyup="checkFormValidation"
+                type="email"
+                class="form-control ltr-input"
+                id="email-address"
+                placeholder="Enter email"
+              />
+              <small class="form-text text-muted">
+                برای ارتباط با شما از این آدرس ایمیل استفاده خواهیم نمود
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label for="phone-address">شماره تماس</label>
+              <input
+                v-model="formData.phone"
+                v-on:keyup="checkFormValidation"
+                type="tel"
+                class="form-control ltr-input"
+                id="phone-address"
+                placeholder="Enter phone number"
+              />
+              <small class="form-text text-muted">
+                برای ارتباط با شما از این شماره تماس استفاده خواهیم نمود
+              </small>
+            </div>
+            <button
+              class="btn btn-primary"
+              v-bind:disabled="!isFormValid"
+              v-on:click="submitForm()"
+            >
+              ثبت درخواست
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+  </body>
+  <script src="./script.js"></script>
+</html>
