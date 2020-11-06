@@ -81,6 +81,15 @@ $(document).ready(function() {
 	    $('.inner-menu').toggleClass('is-active');
 		$('body').toggleClass('open-menu');
     });
+
+
+    /*-----------------------------------------------------------------
+      inner-menu li
+    -------------------------------------------------------------------*/
+
+    $('.inner-menu li').on('click', function() {
+        $('.hamburger').trigger('click');
+    });
 	
 	
     /*-----------------------------------------------------------------
