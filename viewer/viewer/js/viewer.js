@@ -2473,11 +2473,11 @@
     toggle: function toggle() {
       if (this.imageData.ratio === 1) {
           this.zoomTo(this.initialImageData.ratio, true);
-          $("#oneonone").attr("src", "/img/icon/OneToOne.png");
+          $("#oneonone").attr("src", "./img/icon/OneToOne.png");
           $("#oneonone").attr("title", "One to One");
       } else {
           this.zoomTo(1, true);
-          $("#oneonone").attr("src", "/img/icon/FitImage.png");
+          $("#oneonone").attr("src", "./img/icon/FitImage.png");
           $("#oneonone").attr("title", "Fit Image");
       }
 
