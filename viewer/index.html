@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="Satar Dvaoodi" />
+    <link rel="shortcut icon" href="/img/icon.ico" />
+    <title>Viewer</title>
+    <meta name="description" content="Viewer" />
+    <link rel="stylesheet" href="/content/css/bootstrap.min.css?v=51" />
+    <link rel="stylesheet" href="/content/css/site.css?v=51" />
+    <link rel="stylesheet" href="/viewer/css/main.css?v=51" />
+    <link rel="stylesheet" href="/content/css/viewer.css?v=51" />
+    <link rel="stylesheet" href="/viewer/css/viewer.css?v=51" />
+    <link
+      rel="stylesheet"
+      href="/content/font-awesome/css/font-awesome.min.css"
+    />
+    <style>
+      .btn-outline-info {
+        background-color: white;
+      }
+
+      ::-webkit-scrollbar {
+        -webkit-appearance: none;
+      }
+
+      ::-webkit-scrollbar:vertical {
+        width: 6px;
+      }
+
+      ::-webkit-scrollbar:horizontal {
+        height: 6px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: darkblue;
+        border-radius: 0px;
+        border: 1px solid #ffffff;
+      }
+
+      ::-webkit-scrollbar-track {
+        border-radius: 0px;
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row" id="main">
+        <section class="col-md-12 scrollmenu" id="scrollmenu">
+          <div class="rangs">
+            <label for="customRange" style="width: 100%"
+              >Brightness :
+              <span class="eng" style="color: white" id="Brightness_value"
+                >0</span
+              >
+              %
+              <button
+                type="button"
+                onclick="Brightness_reset();"
+                class="btn btn-primary"
+                style="
+                  font-size: 8px;
+                  padding: 5px;
+                  float: right;
+                  margin-right: 10px;
+                "
+              >
+                <i class="fa fa-refresh"></i></button
+            ></label>
+            <input
+              type="range"
+              class="custom-range"
+              id="br"
+              name="br"
+              min="0"
+              max="200"
+              value="100"
+              onchange="editImage();"
+            />
+          </div>
+          <div class="rangs">
+            <label for="customRange2" style="width: 100%"
+              >Contrast :
+              <span style="color: white" class="eng" id="Contrast_value"
+                >0</span
+              >
+              %
+              <button
+                type="button"
+                onclick="Contrast_reset();"
+                class="btn btn-primary"
+                style="
+                  font-size: 8px;
+                  padding: 5px;
+                  float: right;
+                  margin-right: 10px;
+                "
+              >
+                <i class="fa fa-refresh"></i></button
+            ></label>
+            <input
+              type="range"
+              class="custom-range"
+              id="ct"
+              name="ct"
+              min="0"
+              max="200"
+              value="100"
+              onchange="editImage();"
+            />
+          </div>
+          <input type="hidden" id="invert" value="0" />
+          <img
+            class="icon-tools no-mobile"
+            src="/img/icon/Zoom.png"
+            data-enable="inline"
+            data-method="reset"
+            onclick="magnify(1);"
+            title="Magnifier Glass"
+            id="magnifyicon"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/ZoomIn.png"
+            data-arguments="[0.5]"
+            data-enable="inline"
+            data-method="zoom"
+            title="Zoom in"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/ZoomOut.png"
+            data-arguments="[-0.5]"
+            data-enable="inline"
+            data-method="zoom"
+            title="Zoom out"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/OneToOne.png"
+            id="oneonone"
+            data-enable="inline"
+            data-method="toggle"
+            title="One To One"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/RotateClock.png"
+            data-arguments="[90]"
+            data-enable="inline"
+            data-method="rotate"
+            title="Rotate right"
+            id="rotateright"
+          />
+          <img
+            class="icon-tools disabaled"
+            src="/img/icon/RotateClock.png"
+            title="Rotate right"
+            id="rotateright_disabaled"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/RotateCounterClock.png"
+            data-arguments="[-90]"
+            data-enable="inline"
+            data-method="rotate"
+            title="Rotate left"
+            id="rotateleft"
+          />
+          <img
+            class="icon-tools disabaled"
+            src="/img/icon/RotateCounterClock.png"
+            title="Rotate left"
+            id="rotateleft_disabaled"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/Reverse.png"
+            id="fliph"
+            data-arguments="[-1]"
+            data-enable="inline"
+            data-method="scaleX"
+            title="Flip horizontal"
+            onclick="fliph();"
+          />
+          <img
+            class="icon-tools disabaled"
+            src="/img/icon/Reverse.png"
+            id="fliph_disabaled"
+            title="Flip horizontal"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/Flip.png"
+            data-arguments="[-1]"
+            data-enable="inline"
+            data-method="scaleY"
+            title="Flip vertical"
+            id="flipv"
+            onclick="flipv();"
+          />
+          <img
+            class="icon-tools disabaled"
+            src="/img/icon/Flip.png"
+            title="Flip vertical"
+            id="flipv_disabaled"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/InvertColor.png"
+            onclick="invertfunc()"
+            title="Invert Color"
+            id="inverticon"
+          />
+          <img
+            class="icon-tools"
+            src="/img/icon/Reload.png"
+            data-enable="inline"
+            data-method="reset"
+            id="reset"
+            title="Reset"
+          />
+        </section>
+
+        <section
+          class="col-md-12"
+          id="imageview"
+          style="height: 100%; background-color: black"
+        >
+          <div
+            class="docs-galley"
+            id="docs-pictures"
+            style="margin-bottom: 5px !important"
+          >
+            <ul class="docs-pictures clearfix">
+              <li id="imgli">
+                <!-- <img
+                  data-original="http://127.0.0.1:5500/01.jpeg"
+                  src="http://127.0.0.1:5500/01.jpeg"
+                  style="display: none"
+                /> -->
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/content/js/main.js?v=51"></script>
+<script src="/content/js/bootstrap.min.js?v=51"></script>
+<script src="/viewer/js/viewer.js?v=51"></script>
+<script>
+  init();
+
+  function init() {
+    //generate image
+    var img = document.createElement("img");
+    var url = new URL(window.location.href);
+    img.src = url.searchParams.get("img");
+    img.style.display = "none";
+    document.getElementById("imgli").appendChild(img);
+
+    //set width and height
+    var width = getWidth();
+    var heights = getHeight() - 63;
+    var heightsvie = getHeight() - 66;
+    document.getElementById("imageview").style.height = heights + "px";
+    document.getElementById("docs-pictures").style.height = heightsvie + "px";
+  }
+
+  function fliph() {
+    setTimeout(function () {
+      var flip = $("#fliph").attr("data-arguments");
+      if (flip == "[1]") {
+        $("#fliph").attr("data-arguments", "[-1]");
+      } else {
+        $("#fliph").attr("data-arguments", "[1]");
+      }
+    }, 10);
+  }
+
+  function flipv() {
+    setTimeout(function () {
+      var flip = $("#flipv").attr("data-arguments");
+      if (flip == "[1]") {
+        $("#flipv").attr("data-arguments", "[-1]");
+      } else {
+        $("#flipv").attr("data-arguments", "[1]");
+      }
+    }, 10);
+  }
+
+  function getWidth() {
+    return Math.max(
+      document.body.scrollWidth,
+      document.documentElement.scrollWidth,
+      document.body.offsetWidth,
+      document.documentElement.offsetWidth,
+      document.documentElement.clientWidth
+    );
+  }
+
+  function getHeight() {
+    return Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.documentElement.clientHeight
+    );
+  }
+</script>
