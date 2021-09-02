@@ -8,17 +8,17 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <meta name="author" content="Satar Dvaoodi" />
-    <link rel="shortcut icon" href="/img/icon.ico" />
+    <link rel="shortcut icon" href="./img/icon.ico" />
     <title>Viewer</title>
     <meta name="description" content="Viewer" />
-    <link rel="stylesheet" href="/content/css/bootstrap.min.css?v=51" />
-    <link rel="stylesheet" href="/content/css/site.css?v=51" />
-    <link rel="stylesheet" href="/viewer/css/main.css?v=51" />
-    <link rel="stylesheet" href="/content/css/viewer.css?v=51" />
-    <link rel="stylesheet" href="/viewer/css/viewer.css?v=51" />
+    <link rel="stylesheet" href="./content/css/bootstrap.min.css?v=51" />
+    <link rel="stylesheet" href="./content/css/site.css?v=51" />
+    <link rel="stylesheet" href="./viewer/css/main.css?v=51" />
+    <link rel="stylesheet" href="./content/css/viewer.css?v=51" />
+    <link rel="stylesheet" href="./viewer/css/viewer.css?v=51" />
     <link
       rel="stylesheet"
-      href="/content/font-awesome/css/font-awesome.min.css"
+      href="./content/font-awesome/css/font-awesome.min.css"
     />
     <style>
       .btn-outline-info {
@@ -119,7 +119,7 @@
           <input type="hidden" id="invert" value="0" />
           <img
             class="icon-tools no-mobile"
-            src="/img/icon/Zoom.png"
+            src="./img/icon/Zoom.png"
             data-enable="inline"
             data-method="reset"
             onclick="magnify(1);"
@@ -128,7 +128,7 @@
           />
           <img
             class="icon-tools"
-            src="/img/icon/ZoomIn.png"
+            src="./img/icon/ZoomIn.png"
             data-arguments="[0.5]"
             data-enable="inline"
             data-method="zoom"
@@ -136,7 +136,7 @@
           />
           <img
             class="icon-tools"
-            src="/img/icon/ZoomOut.png"
+            src="./img/icon/ZoomOut.png"
             data-arguments="[-0.5]"
             data-enable="inline"
             data-method="zoom"
@@ -144,7 +144,7 @@
           />
           <img
             class="icon-tools"
-            src="/img/icon/OneToOne.png"
+            src="./img/icon/OneToOne.png"
             id="oneonone"
             data-enable="inline"
             data-method="toggle"
@@ -152,7 +152,7 @@
           />
           <img
             class="icon-tools"
-            src="/img/icon/RotateClock.png"
+            src="./img/icon/RotateClock.png"
             data-arguments="[90]"
             data-enable="inline"
             data-method="rotate"
@@ -161,13 +161,13 @@
           />
           <img
             class="icon-tools disabaled"
-            src="/img/icon/RotateClock.png"
+            src="./img/icon/RotateClock.png"
             title="Rotate right"
             id="rotateright_disabaled"
           />
           <img
             class="icon-tools"
-            src="/img/icon/RotateCounterClock.png"
+            src="./img/icon/RotateCounterClock.png"
             data-arguments="[-90]"
             data-enable="inline"
             data-method="rotate"
@@ -176,13 +176,13 @@
           />
           <img
             class="icon-tools disabaled"
-            src="/img/icon/RotateCounterClock.png"
+            src="./img/icon/RotateCounterClock.png"
             title="Rotate left"
             id="rotateleft_disabaled"
           />
           <img
             class="icon-tools"
-            src="/img/icon/Reverse.png"
+            src="./img/icon/Reverse.png"
             id="fliph"
             data-arguments="[-1]"
             data-enable="inline"
@@ -192,13 +192,13 @@
           />
           <img
             class="icon-tools disabaled"
-            src="/img/icon/Reverse.png"
+            src="./img/icon/Reverse.png"
             id="fliph_disabaled"
             title="Flip horizontal"
           />
           <img
             class="icon-tools"
-            src="/img/icon/Flip.png"
+            src="./img/icon/Flip.png"
             data-arguments="[-1]"
             data-enable="inline"
             data-method="scaleY"
@@ -208,20 +208,20 @@
           />
           <img
             class="icon-tools disabaled"
-            src="/img/icon/Flip.png"
+            src="./img/icon/Flip.png"
             title="Flip vertical"
             id="flipv_disabaled"
           />
           <img
             class="icon-tools"
-            src="/img/icon/InvertColor.png"
+            src="./img/icon/InvertColor.png"
             onclick="invertfunc()"
             title="Invert Color"
             id="inverticon"
           />
           <img
             class="icon-tools"
-            src="/img/icon/Reload.png"
+            src="./img/icon/Reload.png"
             data-enable="inline"
             data-method="reset"
             id="reset"
@@ -256,9 +256,9 @@
 </html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/content/js/main.js?v=51"></script>
-<script src="/content/js/bootstrap.min.js?v=51"></script>
-<script src="/viewer/js/viewer.js?v=51"></script>
+<script src="./content/js/main.js?v=51"></script>
+<script src="./content/js/bootstrap.min.js?v=51"></script>
+<script src="./viewer/js/viewer.js?v=51"></script>
 <script>
   init();
 
@@ -266,7 +266,11 @@
     //generate image
     var img = document.createElement("img");
     var url = new URL(window.location.href);
-    img.src = url.searchParams.get("img");
+    var imageUrl = url.searchParams.get("img");
+    if (!imageUrl) {
+      window.location = "https://hormozdi.github.io/";
+    }
+    img.src = imageUrl;
     img.style.display = "none";
     document.getElementById("imgli").appendChild(img);
 
