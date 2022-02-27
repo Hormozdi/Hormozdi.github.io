@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Noto+Sans"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input
+        ref="customInput"
+        class="custom-input"
+        :class="{
+            'has-value': searchValue.length,
+        }"
+        v-model="searchValue"
+        @keyup="search"
+        placeholder="Add tags..."
+      />
+      <div v-if="searchResult.length" class="result-box">
+        <div
+          v-for="(result, index) in searchResult"
+          @click="clickSearchItem(result)"
+          class="result-item"
+          :class="{
+              'highlighted': index === highlightedItemIndex,
+          }"
+        >
+          {{result.label}}
+        </div>
+      </div>
+      <span
+        v-for="item in selectedItems"
+        @click="removeSearchItem(item)"
+        class="badge"
+      >
+        {{item.label}}
+      </span>
+    </div>
+  </body>
+  <script src="./assets/vue.global.js"></script>
+  <script type="module" src="./assets/script.js"></script>
+</html>
